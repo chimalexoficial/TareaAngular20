@@ -1,0 +1,50 @@
+<div class="mx-sm-3 mb-2">
+  <input [(ngModel)]="inputText" type="text" class="form-control" id="input" placeholder="Buscar...">
+</div>
+<button type="submit" class="btn btn-primary mb-2 btn-danger" (click)="busquedaFilter()">Buscar productos</button>
+<p *ngIf= "inputText.length > 0"> Buscando: {{inputText}}</p>
+
+
+<!-- STARTING CHECKBOX -->
+<div class="form-check">
+  <input type="checkbox" class="form-check-input" id="check1" (change) = "firstChecked()">
+  <label class="form-check-label" for="check1">Solo en existencia</label>
+</div>
+
+<div class="form-check">
+  <input type="checkbox" class="form-check-input" id="check2" (change) = "secondChecked()">
+  <label class="form-check-label" for="check2">Ordenar por precio (menor a mayor)</label>
+</div>
+
+<div class="form-check">
+  <input type="checkbox" class="form-check-input" id="check3" (change) = "thirdChecked()">
+  <label class="form-check-label" for="check3">Resaltar existencia mayor a 3</label>
+</div>
+<!-- FINISHING CHECKBOX -->
+
+<!-- STARTING NO SE ECONTRÓ-->
+<div *ngIf="busquedaActual.length == 0" class="alert alert-danger" role="alert">
+  Ningun producto concuerda con la busqueda.
+</div>
+
+<!-- FINISHING NO SE ECONTRÓ-->
+
+<!-- STARTING PRODUCTS -->
+
+<div class="container" *ngIf= "busquedaActual.length > 0">
+  <div class="row" *ngFor="let p of productos">
+    <div class="col col-lg-2">
+      <img src="http://picsum.photos/id/{{p.uid}}/100/100">
+    </div>
+    <div class="col col-lg-3 ">
+      <h4>{{p.nombre}}</h4>
+      <p>Precio(MXN): {{p.precio}}</p>
+      <p>Marca: {{p.marca}}</p>
+      <p>Descripcion: {{p.descripcion}}</p>
+      <p>Existencia: {{p.existencia}}</p>
+      <hr>
+    </div>
+  </div>
+</div>
+
+<!-- FINISHING PRODUCTS -->
